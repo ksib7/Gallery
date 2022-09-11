@@ -15,6 +15,27 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
+      {
+        test: /\.(png|jpe?g|gif|webp)$/i,
+        use: [
+          {
+            loader: `img-optimize-loader`,
+            options: {
+              compress: {
+                mode: "high",
+                webp: true,
+                disableOnDevelopment: true,
+                gifsicle: true,
+                name: "[path][name].[ext]",
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /\.mp[34]$/i,
+        use: ["file-loader"],
+      },
     ],
   },
 
